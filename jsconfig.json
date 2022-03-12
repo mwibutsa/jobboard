@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@helpers/*": ["src/helpers/*"],
+      "@constants/*": ["src/constants/*"],
+      "@testUtils/*": ["src/helpers/testUtils/*"],
+      "@utils/*": ["src/utils/*"],
+      "@models/*": ["src/database/models/*"],
+      "@models": ["src/database/models"],
+      "@dbConfig": ["src/database/dbConfig"],
+      "@controllers/*": ["src/controllers/*"],
+      "@routes/*": ["src/routes/*"],
+      "@routes": ["src/routes"],
+      "@middleware/*": ["src/middleware/*"],
+      "@swagger": ["src/swagger"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "coverage", "build"]
+}
