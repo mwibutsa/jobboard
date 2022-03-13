@@ -10,23 +10,42 @@
   "scripts": {
     "dev": "nodemon",
     "build": "rimraf dist/;  babel src/ --out-dir dist/ --copy-files",
-    "start": "node dist/"
+    "start": "node dist/",
+    "lint": "eslint .",
+    "lint:fix": "yarn lint --fix"
+  },
+  "lint-staged": {
+    "src/**/*.{js,json}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn build && lint-staged",
+      "pre-push": "git diff HEAD --quiet"
+    }
   },
   "dependencies": {
     "babel-plugin-module-resolver": "^4.1.0",
     "bcrypt": "^5.0.1",
     "celebrate": "^15.0.1",
+    "cloudinary": "^1.28.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-fileupload": "^1.3.1",
     "helmet": "^5.0.2",
     "http-errors": "^2.0.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^8.4.0",
     "mongoose": "^6.2.6",
     "morgan": "^1.10.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "streamifier": "^0.1.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -35,8 +54,17 @@
     "@babel/preset-env": "^7.16.11",
     "eslint": "^8.11.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-babel-module": "^5.3.1",
+    "eslint-import-resolver-jest": "^3.0.2",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "jsdoc": "^3.6.10",
+    "lint-staged": "^12.3.5",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "prettier-eslint": "^13.0.0"
   }
 }
