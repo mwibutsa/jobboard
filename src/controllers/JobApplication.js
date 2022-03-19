@@ -29,36 +29,40 @@ class JobApplication {
    * @returns {Promise} -
    */
   static async applyForJob(req, res) {
-    const { jobId } = req.params;
+    const { jobId } = req.body;
     const job = await JobModel.findById(jobId);
     let cvFile = null;
-    if (req.files?.cvFile) {
-      cvFile = await uploadFile(req.files.cvFile);
-    } else {
-      return jsonResponse({
-        res,
-        status: statusCodes.HTTP_BAD_REQUEST,
-        message: 'Please upload a cv file',
-      });
-    }
 
     if (job) {
       // check previous applications
       const previousApplication = await JobApplicationModel.find().where({
         job: jobId,
         applicant: req.currentUserId,
-        cvFile: cvFile.url,
       });
 
-      if (previousApplication) {
+      if (previousApplication.length) {
         return jsonResponse({
           status: statusCodes.HTTP_CONFLICT,
           res,
           message: 'You have already applied for this job',
         });
       }
+
+      if (req.files?.cvFile) {
+        cvFile = await uploadFile(req.files.cvFile);
+      } else {
+        return jsonResponse({
+          res,
+          status: statusCodes.HTTP_BAD_REQUEST,
+          message: 'Please upload a cv file',
+        });
+      }
       // save application
-      const newApplication = await JobApplicationModel.create({ job: jobId, applicant: req.currentUserId });
+      const newApplication = await JobApplicationModel.create({
+        job: jobId,
+        applicant: req.currentUserId,
+        cvFile: cvFile.url,
+      });
       return jsonResponse({ status: statusCodes.HTTP_CREATED, res, data: newApplication });
     }
 

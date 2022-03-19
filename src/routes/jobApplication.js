@@ -18,7 +18,7 @@ jobApplicationRouter.get(
   requestWrapper(JobApplicationController.getJobApplicantDetails),
 );
 jobApplicationRouter.post(
-  '/apply-for-job/:jobId',
+  '/apply-for-job',
   isAuthenticated,
   validator.applyForJob,
   requestWrapper(JobApplicationController.applyForJob),
