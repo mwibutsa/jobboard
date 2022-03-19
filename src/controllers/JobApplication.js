@@ -2,6 +2,7 @@ import jsonResponse from '@helpers/jsonResponse';
 import * as statusCodes from '@constants/statusCodes';
 import { JobApplicationModel, JobModel } from '@models';
 import uploadFile from '@helpers/cloudinary';
+
 /**
  * A class to manage job postings
  */
