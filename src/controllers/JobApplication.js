@@ -2,26 +2,11 @@ import jsonResponse from '@helpers/jsonResponse';
 import * as statusCodes from '@constants/statusCodes';
 import { JobApplicationModel, JobModel } from '@models';
 import uploadFile from '@helpers/cloudinary';
+
 /**
  * A class to manage job postings
  */
 class JobApplication {
-  /**
-   *
-   * @param {Request} req
-   * @param {Response} res
-   * @returns {Promise} -
-   */
-  static async getApplications(req, res) {
-    const applications = await JobApplicationModel.find()
-      .limit(10)
-      .populate('applicant', ['firstName', 'lastName', 'email', 'phoneNumber'])
-      .populate('job')
-      .exec();
-
-    return jsonResponse({ res, data: applications });
-  }
-
   /**
    *
    * @param {Request} req

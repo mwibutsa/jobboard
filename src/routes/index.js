@@ -7,6 +7,6 @@ const router = Router();
 
 router.use('/user', userRouter);
 router.use('/jobs', jobRouter);
-router.use('/job-application', jobApplicationRouter);
+router.use('/job-applications', jobApplicationRouter);
 
 export default router;

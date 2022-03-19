@@ -23,6 +23,34 @@ class JobController {
    * @param {Response} res
    * @returns {Promise} -
    */
+  static async getApplications(req, res) {
+    const applications = await JobApplicationModel.find()
+      .where({ job: req.params.jobId })
+      .limit(10)
+      .populate('applicant', ['firstName', 'lastName', 'email', 'phoneNumber'])
+      .populate('job')
+      .exec();
+
+    return jsonResponse({ res, data: applications });
+  }
+
+  /**
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise} -
+   */
+  static async getRecruiterJobs(req, res) {
+    const jobs = await JobModel.find().where({ postedBy: String(req.currentUserId) });
+    return jsonResponse({ res, data: jobs });
+  }
+
+  /**
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise} -
+   */
   static async postJob(req, res) {
     const newJob = await JobModel.create({ ...req.body, postedBy: req.currentUserId });
 

@@ -12,7 +12,8 @@
     "build": "rimraf dist/;  babel src/ --out-dir dist/ --copy-files",
     "start": "node dist/",
     "lint": "eslint .",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "prestart": "yarn build"
   },
   "lint-staged": {
     "src/**/*.{js,json}": [
@@ -27,6 +28,7 @@
     }
   },
   "dependencies": {
+    "@babel/runtime": "^7.17.8",
     "babel-plugin-module-resolver": "^4.1.0",
     "bcrypt": "^5.0.1",
     "celebrate": "^15.0.1",
@@ -45,13 +47,14 @@
     "morgan": "^1.10.0",
     "rimraf": "^3.0.2",
     "streamifier": "^0.1.1",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
+    "uuid": "^8.3.2",
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",
     "@babel/node": "^7.16.8",
-    "@babel/preset-env": "^7.16.11",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11"
+  },
+  "devDependencies": {
     "eslint": "^8.11.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",

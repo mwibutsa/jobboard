@@ -6,7 +6,6 @@ import isAuthenticated from '@middleware/isAuthenticated';
 
 const jobApplicationRouter = Router();
 
-jobApplicationRouter.get('/all', requestWrapper(JobApplicationController.getApplications));
 jobApplicationRouter.get(
   '/:applicationId',
   isAuthenticated,

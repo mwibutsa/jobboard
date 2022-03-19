@@ -39,7 +39,7 @@ class UserController {
       $or: [{ email }, { phoneNumber }],
     });
 
-    if (existingUser) {
+    if (existingUser.length) {
       return jsonResponse({
         status: statusCodes.HTTP_CONFLICT,
         message: 'User with the same email/phone number exists',
